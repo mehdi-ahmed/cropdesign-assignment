@@ -16,7 +16,7 @@
       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
       <junit.version>4.10</junit.version>
       <mockito-core.version>1.9.5</mockito-core.version>
-      <stax.version>1.0.1</stax.version>
+      <jaxb.version>2.1</jaxb.version>
   </properties>
 
   <dependencies>
@@ -33,9 +33,9 @@
           <scope>test</scope>
       </dependency>
       <dependency>
-          <groupId>stax</groupId>
-          <artifactId>stax-api</artifactId>
-          <version>${stax.version}</version>
+          <groupId>javax.xml</groupId>
+          <artifactId>jaxb-api</artifactId>
+          <version>${jaxb.version}</version>
       </dependency>
   </dependencies>
 </project>
