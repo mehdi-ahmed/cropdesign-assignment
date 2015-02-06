@@ -1,1 +1,1 @@
-mvn exec:java -Dexec.mainClass="com.cropdesign.assignment.ui.GoTermsTree"
+mvn clean install -DskipTests exec:java -Dexec.mainClass="com.cropdesign.assignment.ui.GoTermsTree"
