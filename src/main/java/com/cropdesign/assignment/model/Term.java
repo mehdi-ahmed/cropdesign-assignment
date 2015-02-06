@@ -9,8 +9,9 @@ public class Term {
 
     private String id;
     private String name;
-    private String nameSpace;
+    private String namespace;
     private String def;
+    private String comment;
     private List<String> is_a;
     private List<String> alt_id;
     private List<String> subset;
@@ -35,12 +36,12 @@ public class Term {
         this.name = name;
     }
 
-    public String getNameSpace() {
-        return nameSpace;
+    public String getNamespace() {
+        return namespace;
     }
 
-    public void setNameSpace(String nameSpace) {
-        this.nameSpace = nameSpace;
+    public void setNamespace(String namespace) {
+        this.namespace = namespace;
     }
 
     public String getDef() {
@@ -49,6 +50,14 @@ public class Term {
 
     public void setDef(String def) {
         this.def = def;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public List<String> getIs_a() {

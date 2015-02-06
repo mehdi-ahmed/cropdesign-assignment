@@ -51,11 +51,11 @@ public class TermsTree extends JPanel {
         splitPane.setTopComponent(treeView);
         //splitPane.setBottomComponent(htmlView);
 
-        Dimension minimumSize = new Dimension(900, 900);
+        Dimension minimumSize = new Dimension(600, 600);
         //htmlView.setMinimumSize(minimumSize);
         treeView.setMinimumSize(minimumSize);
-        splitPane.setDividerLocation(800);
-        splitPane.setPreferredSize(new Dimension(900, 900));
+        splitPane.setDividerLocation(600);
+        splitPane.setPreferredSize(new Dimension(600, 600));
 
         // Add the split pane to this panel.
         add(splitPane);
@@ -64,13 +64,17 @@ public class TermsTree extends JPanel {
     private void createNodes(DefaultMutableTreeNode top) throws JAXBException {
         DefaultMutableTreeNode term = null;
         DefaultMutableTreeNode name = null;
+        DefaultMutableTreeNode namespace = null;
         XmlReader xmlReader = new XmlReader();
         List<Term> terms = xmlReader.getTerms();
 
         for (Term t : terms) {
             term = new DefaultMutableTreeNode("id="+t.getId());
             name = new DefaultMutableTreeNode("name="+t.getName());
+            namespace = new DefaultMutableTreeNode("namespace="+t.getNamespace());
             term.add(name);
+            term.add(namespace);
+
             top.add(term);
         }
     }
