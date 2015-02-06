@@ -1,6 +1,7 @@
 package com.cropdesign.assignment.model;
 
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Term {
     private List<String> is_a;
     private List<String> alt_id;
     private List<String> subset;
-    private List<String> synonym;
+    private List<Synonym> synonym;
     private String xref_analog;
     private String relationship;
 
@@ -84,11 +85,12 @@ public class Term {
         this.subset = subset;
     }
 
-    public List<String> getSynonym() {
+    @XmlElement(name="synonym")
+    public List<Synonym> getSynonym() {
         return synonym;
     }
 
-    public void setSynonym(List<String> synonym) {
+    public void setSynonym(List<Synonym> synonym) {
         this.synonym = synonym;
     }
 

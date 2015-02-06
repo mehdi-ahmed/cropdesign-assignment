@@ -1,7 +1,7 @@
 package com.cropdesign.assignment.ui;
 
 import com.cropdesign.assignment.model.Term;
-import com.cropdesign.assignment.util.JAXBHandlerUtil;
+import com.cropdesign.assignment.util.XmlReader;
 
 import java.awt.*;
 import java.net.URL;
@@ -62,6 +62,15 @@ public class GoTermsTree extends JPanel {
     }
 
     private void createNodes(DefaultMutableTreeNode top) throws JAXBException {
+        DefaultMutableTreeNode term;
+        DefaultMutableTreeNode name;
+        DefaultMutableTreeNode namespace;
+        DefaultMutableTreeNode top_synonym = null;
+
+        //call constructor and fill the list after reading and parsing
+        XmlReader xmlReader = new XmlReader();
+        List<Term> terms = xmlReader.getTerms();
+        List<Synonym> synonyms;
         DefaultMutableTreeNode term = null;
         DefaultMutableTreeNode name = null;
         DefaultMutableTreeNode namespace = null;
@@ -70,15 +79,88 @@ public class GoTermsTree extends JPanel {
         List<Term> terms = JAXBHandlerUtil.unMarshal();
 
         for (Term t : terms) {
-            term = new DefaultMutableTreeNode("id="+t.getId());
+            term = new DefaultMutableTreeNode(t.getId());
             name = new DefaultMutableTreeNode("name="+t.getName());
             namespace = new DefaultMutableTreeNode("namespace="+t.getNamespace());
+            top_synonym = new DefaultMutableTreeNode("synonym");
+            //synonyms = t.getSynonym();
+             /*if(synonyms != null) {
+                for(Synonym s : synonyms) {
+                   // top_synonym = new DefaultMutableTreeNode("synonym_text="+s.getSynonym_text());
+
+                }
+            }*/
             term.add(name);
             term.add(namespace);
-
+            term.add(top_synonym);
             top.add(term);
         }
     }
+
+   /* Node createDataTree () {
+        Node t, u, v, w, x;
+        Node z = new Node ("zero");
+
+        z.children.add (t = new Node ("one A"));
+        t.children.add (u = new Node ("twoA A"));
+        t.children.add (u = new Node ("twoA B"));
+        t.children.add (u = new Node ("twoA C"));
+        u.children.add (w = new Node ("threeAC A"));
+        u.children.add (w = new Node ("threeAC B"));
+        t.children.add (u = new Node ("twoA D"));
+        z.children.add (t = new Node ("one B"));
+        t.children.add (u = new Node ("twoB A"));
+        t.children.add (u = new Node ("twoB B"));
+        u.children.add (w = new Node ("threeBB A"));
+        u.children.add (w = new Node ("threeBB B"));
+        w.children.add (x = new Node ("threeBBB A"));
+        w.children.add (x = new Node ("threeBBB B"));
+        t.children.add (u = new Node ("twoB C"));
+        t.children.add (u = new Node ("twoB D"));
+        z.children.add (t = new Node ("one C"));
+        t.children.add (u = new Node ("twoC A"));
+        t.children.add (u = new Node ("twoC B"));
+        t.children.add (u = new Node ("twoC C"));
+        t.children.add (u = new Node ("twoC D"));
+        z.children.add (t = new Node ("one D"));
+        t.children.add (u = new Node ("twoD A"));
+        t.children.add (u = new Node ("twoD B"));
+        t.children.add (u = new Node ("twoD C"));
+        t.children.add (u = new Node ("twoD D"));
+        return z;
+    } // end createDataTree*/
+//} // end class JTreeExample
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Create the GUI and show it. For thread safety, this method should be invoked from the event dispatch thread.
