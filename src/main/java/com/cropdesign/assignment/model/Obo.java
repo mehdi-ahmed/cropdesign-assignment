@@ -1,4 +1,4 @@
-package com.cropdesign.assignment.domain;
+package com.cropdesign.assignment.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

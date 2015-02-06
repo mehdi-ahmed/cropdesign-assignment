@@ -1,8 +1,8 @@
-package com.cropdesign.assignment.domain.util;
+package com.cropdesign.assignment.util;
 
 
-import com.cropdesign.assignment.domain.Obo;
-import com.cropdesign.assignment.domain.Term;
+import com.cropdesign.assignment.model.Obo;
+import com.cropdesign.assignment.model.Term;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -13,6 +13,10 @@ import java.util.List;
 public class XmlReader {
 
     private final static String XML_FILE_PATH = "go_daily-termdb.obo-xml";
+
+    public List<Term> getTerms() {
+        return terms;
+    }
 
     private List<Term> terms;
     private Obo obo;
@@ -28,10 +32,5 @@ public class XmlReader {
 
         obo = (Obo) jaxbUnmarshaller.unmarshal(xmlFile);
         terms = obo.getTerms();
-
-        for(Term term : terms) {
-            System.out.println(term.getId());
-        }
-
     }
 }
