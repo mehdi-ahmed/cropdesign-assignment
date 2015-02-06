@@ -10,6 +10,11 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.List;
 
+/**
+ * Utility Class that reads an XML File, and then Jaxb is used to unmarshal the XML document into a Java content tree
+ * To be used by the UI(e.g JTree..)
+ */
+
 public class JAXBHandlerUtil {
 
     private final static String XML_FILE_NAME = "go_daily-termdb.obo-xml";
@@ -28,7 +33,6 @@ public class JAXBHandlerUtil {
 
     public static File readXmlFile(String fileName) {
         ClassLoader classLoader = JAXBHandlerUtil.class.getClassLoader();
-        File xmlFile = new File(classLoader.getResource(fileName).getFile());
-        return xmlFile;
+        return new File(classLoader.getResource(fileName).getFile());
     }
 }

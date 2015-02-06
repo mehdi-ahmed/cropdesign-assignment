@@ -1,7 +1,7 @@
 package com.cropdesign.assignment.ui;
 
 import com.cropdesign.assignment.model.Term;
-import com.cropdesign.assignment.util.XmlReader;
+import com.cropdesign.assignment.util.JAXBHandlerUtil;
 
 import java.awt.*;
 import java.net.URL;
@@ -65,8 +65,9 @@ public class GoTermsTree extends JPanel {
         DefaultMutableTreeNode term = null;
         DefaultMutableTreeNode name = null;
         DefaultMutableTreeNode namespace = null;
-        XmlReader xmlReader = new XmlReader();
-        List<Term> terms = xmlReader.getTerms();
+
+
+        List<Term> terms = JAXBHandlerUtil.unMarshal();
 
         for (Term t : terms) {
             term = new DefaultMutableTreeNode("id="+t.getId());
