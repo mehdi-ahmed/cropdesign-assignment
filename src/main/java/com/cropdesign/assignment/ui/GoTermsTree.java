@@ -12,7 +12,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import javax.xml.bind.JAXBException;
 
-public class TermsTree extends JPanel {
+public class GoTermsTree extends JPanel {
 
     private JEditorPane htmlPane;
     private JTree tree;
@@ -27,7 +27,7 @@ public class TermsTree extends JPanel {
     // Optionally set the look and feel.
     private static boolean useSystemLookAndFeel = false;
 
-    public TermsTree() throws JAXBException {
+    public GoTermsTree() throws JAXBException {
         super(new GridLayout(1, 0));
 
         // Create the nodes.
@@ -92,11 +92,11 @@ public class TermsTree extends JPanel {
         }
 
         // Create and set up the window.
-        JFrame frame = new JFrame("TreeDemo");
+        JFrame frame = new JFrame("CropDesign assignment - GO terms parsing");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Add content to the window.
-        frame.add(new TermsTree());
+        frame.add(new GoTermsTree());
 
         // Display the window.
         frame.pack();
