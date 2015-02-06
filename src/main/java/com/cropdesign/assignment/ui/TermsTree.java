@@ -63,11 +63,14 @@ public class TermsTree extends JPanel {
 
     private void createNodes(DefaultMutableTreeNode top) throws JAXBException {
         DefaultMutableTreeNode term = null;
+        DefaultMutableTreeNode name = null;
         XmlReader xmlReader = new XmlReader();
         List<Term> terms = xmlReader.getTerms();
 
         for (Term t : terms) {
-            term = new DefaultMutableTreeNode(t.getId());
+            term = new DefaultMutableTreeNode("id="+t.getId());
+            name = new DefaultMutableTreeNode("name="+t.getName());
+            term.add(name);
             top.add(term);
         }
     }
