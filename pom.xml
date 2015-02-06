@@ -17,6 +17,7 @@
       <junit.version>4.10</junit.version>
       <mockito-core.version>1.9.5</mockito-core.version>
       <jaxb.version>2.2.3</jaxb.version>
+      <apache.commons.version>2.4</apache.commons.version>
   </properties>
 
   <dependencies>
@@ -36,6 +37,11 @@
           <groupId>javax.xml.bind</groupId>
           <artifactId>jaxb-api</artifactId>
           <version>${jaxb.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.directory.studio</groupId>
+          <artifactId>org.apache.commons.io</artifactId>
+          <version>${apache.commons.version}</version>
       </dependency>
   </dependencies>
 </project>

@@ -58,11 +58,11 @@ public class TreeDemo extends JPanel implements TreeSelectionListener {
         splitPane.setTopComponent(treeView);
         splitPane.setBottomComponent(htmlView);
 
-        Dimension minimumSize = new Dimension(100, 50);
+        Dimension minimumSize = new Dimension(900, 900);
         htmlView.setMinimumSize(minimumSize);
         treeView.setMinimumSize(minimumSize);
-        splitPane.setDividerLocation(100);
-        splitPane.setPreferredSize(new Dimension(500, 300));
+        splitPane.setDividerLocation(800);
+        splitPane.setPreferredSize(new Dimension(900, 900));
 
         // Add the split pane to this panel.
         add(splitPane);
