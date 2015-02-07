@@ -31,8 +31,13 @@ public class JAXBHandlerUtil {
 
     }
 
-    private static File readXmlFile(String fileName) {
+    public static File readXmlFile(String fileName) {
         ClassLoader classLoader = JAXBHandlerUtil.class.getClassLoader();
+        if (classLoader.getResource(fileName) == null) {
+            return null;
+        }
         return new File(classLoader.getResource(fileName).getFile());
     }
+
 }
+

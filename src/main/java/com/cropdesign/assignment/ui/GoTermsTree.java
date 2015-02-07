@@ -13,6 +13,8 @@ import java.net.URL;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import javax.xml.bind.JAXBException;
@@ -41,7 +43,38 @@ public class GoTermsTree extends JPanel {
         // Create a tree that allows one selection at a time.
         //tree = new JTree(top);
         DefaultMutableTreeNode jtTop = createNodes(top);
-        JTree tree = new JTree(jtTop);
+        final JTree tree = new JTree(jtTop);
+        tree.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
+
+    /* if nothing is selected */
+                if (node == null) {
+                    return;
+                }
+
+    /* retrieve the node that was selected */
+                Object nodeInfo = node.getUserObject();
+    /* React to the node selection. */
+                final JFrame parent = new JFrame();
+                JButton button = new JButton();
+
+                button.setText("Click me to show dialog!");
+                parent.add(button);
+                parent.pack();
+                parent.setVisible(true);
+
+                button.addActionListener(new java.awt.event.ActionListener() {
+                    @Override
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        String name = JOptionPane.showInputDialog(parent,
+                                "What is your name?", null);
+                    }
+                });
+            }
+
+        });
 
 
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
