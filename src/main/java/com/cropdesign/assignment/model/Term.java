@@ -11,15 +11,51 @@ public class Term {
     private String id;
     private String name;
     private String namespace;
-    private String def;
-    private String comment;
-    private List<String> is_a;
-    private List<String> alt_id;
+    private Def def;
     private List<String> subset;
     private List<Synonym> synonym;
-    private String xref_analog;
-    private String relationship;
+    private List<String> is_a;
+    private List<Relationship> relationship;
+    private String comment;
+    private String is_obsolete;
+    private List<String> consider;
+    private List<String> alt_id;
+    private List<XrefAnalog> xref_analogs;
 
+
+    @XmlElement(name = "relationship")
+    public List<Relationship> getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(List<Relationship> relationship) {
+        this.relationship = relationship;
+    }
+
+    public String getIs_obsolete() {
+        return is_obsolete;
+    }
+
+    public void setIs_obsolete(String is_obsolete) {
+        this.is_obsolete = is_obsolete;
+    }
+
+    public List<String> getConsider() {
+        return consider;
+    }
+
+    public void setConsider(List<String> consider) {
+        this.consider = consider;
+    }
+
+    @XmlElement(name = "xref_analog")
+    public List<XrefAnalog> getXref_analogs() {
+        return xref_analogs;
+    }
+
+    public void setXref_analogs(List<XrefAnalog> xref_analogs) {
+        this.xref_analogs = xref_analogs;
+    }
 
     public String getId() {
         return id;
@@ -45,11 +81,11 @@ public class Term {
         this.namespace = namespace;
     }
 
-    public String getDef() {
+    public Def getDef() {
         return def;
     }
 
-    public void setDef(String def) {
+    public void setDef(Def def) {
         this.def = def;
     }
 
@@ -85,7 +121,7 @@ public class Term {
         this.subset = subset;
     }
 
-    @XmlElement(name="synonym")
+    @XmlElement(name = "synonym")
     public List<Synonym> getSynonym() {
         return synonym;
     }
@@ -94,19 +130,5 @@ public class Term {
         this.synonym = synonym;
     }
 
-    public String getXref_analog() {
-        return xref_analog;
-    }
 
-    public void setXref_analog(String xref_analog) {
-        this.xref_analog = xref_analog;
-    }
-
-    public String getRelationship() {
-        return relationship;
-    }
-
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
-    }
 }

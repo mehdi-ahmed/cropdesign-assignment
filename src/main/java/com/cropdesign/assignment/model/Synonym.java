@@ -7,6 +7,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Synonym {
 
     private String synonym_text;
+    private Dbxref dbxref;
+
+    public Dbxref getDbxref() {
+        return dbxref;
+    }
+
+    public void setDbxref(Dbxref dbxref) {
+        this.dbxref = dbxref;
+    }
 
     public String getSynonym_text() {
         return synonym_text;

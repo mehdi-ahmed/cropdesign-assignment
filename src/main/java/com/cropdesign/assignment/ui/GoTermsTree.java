@@ -1,7 +1,12 @@
 package com.cropdesign.assignment.ui;
 
+import com.cropdesign.assignment.model.Dbxref;
+import com.cropdesign.assignment.model.Relationship;
+import com.cropdesign.assignment.model.Synonym;
 import com.cropdesign.assignment.model.Term;
-import com.cropdesign.assignment.util.XmlReader;
+import com.cropdesign.assignment.ui.test.Node;
+import com.cropdesign.assignment.ui.test.NodeIF;
+import com.cropdesign.assignment.util.JAXBHandlerUtil;
 
 import java.awt.*;
 import java.net.URL;
@@ -31,11 +36,14 @@ public class GoTermsTree extends JPanel {
         super(new GridLayout(1, 0));
 
         // Create the nodes.
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Obo");
-        createNodes(top);
+        Node top = createDataTree();
 
         // Create a tree that allows one selection at a time.
-        tree = new JTree(top);
+        //tree = new JTree(top);
+        DefaultMutableTreeNode jtTop = createNodes(top);
+        JTree tree = new JTree(jtTop);
+
+
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
         if (playWithLineStyle) {
@@ -62,104 +70,79 @@ public class GoTermsTree extends JPanel {
     }
 
     private void createNodes(DefaultMutableTreeNode top) throws JAXBException {
-        DefaultMutableTreeNode term;
-        DefaultMutableTreeNode name;
-        DefaultMutableTreeNode namespace;
-        DefaultMutableTreeNode top_synonym = null;
-
-        //call constructor and fill the list after reading and parsing
-        XmlReader xmlReader = new XmlReader();
-        List<Term> terms = xmlReader.getTerms();
-        List<Synonym> synonyms;
-        DefaultMutableTreeNode term = null;
-        DefaultMutableTreeNode name = null;
-        DefaultMutableTreeNode namespace = null;
-
-
-        List<Term> terms = JAXBHandlerUtil.unMarshal();
-
-        for (Term t : terms) {
-            term = new DefaultMutableTreeNode(t.getId());
-            name = new DefaultMutableTreeNode("name="+t.getName());
-            namespace = new DefaultMutableTreeNode("namespace="+t.getNamespace());
-            top_synonym = new DefaultMutableTreeNode("synonym");
-            //synonyms = t.getSynonym();
-             /*if(synonyms != null) {
-                for(Synonym s : synonyms) {
-                   // top_synonym = new DefaultMutableTreeNode("synonym_text="+s.getSynonym_text());
-
-                }
-            }*/
-            term.add(name);
-            term.add(namespace);
-            term.add(top_synonym);
-            top.add(term);
-        }
     }
 
-   /* Node createDataTree () {
-        Node t, u, v, w, x;
-        Node z = new Node ("zero");
 
-        z.children.add (t = new Node ("one A"));
-        t.children.add (u = new Node ("twoA A"));
-        t.children.add (u = new Node ("twoA B"));
-        t.children.add (u = new Node ("twoA C"));
-        u.children.add (w = new Node ("threeAC A"));
-        u.children.add (w = new Node ("threeAC B"));
-        t.children.add (u = new Node ("twoA D"));
-        z.children.add (t = new Node ("one B"));
-        t.children.add (u = new Node ("twoB A"));
-        t.children.add (u = new Node ("twoB B"));
-        u.children.add (w = new Node ("threeBB A"));
-        u.children.add (w = new Node ("threeBB B"));
-        w.children.add (x = new Node ("threeBBB A"));
-        w.children.add (x = new Node ("threeBBB B"));
-        t.children.add (u = new Node ("twoB C"));
-        t.children.add (u = new Node ("twoB D"));
-        z.children.add (t = new Node ("one C"));
-        t.children.add (u = new Node ("twoC A"));
-        t.children.add (u = new Node ("twoC B"));
-        t.children.add (u = new Node ("twoC C"));
-        t.children.add (u = new Node ("twoC D"));
-        z.children.add (t = new Node ("one D"));
-        t.children.add (u = new Node ("twoD A"));
-        t.children.add (u = new Node ("twoD B"));
-        t.children.add (u = new Node ("twoD C"));
-        t.children.add (u = new Node ("twoD D"));
-        return z;
-    } // end createDataTree*/
-//} // end class JTreeExample
+    DefaultMutableTreeNode createNodes(NodeIF t) {
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode(t);
+        for (NodeIF n : t.getChildren()) top.add(createNodes(n));
+        return top;
+    }
 
 
+    Node createDataTree() throws JAXBException {
+        List<Term> terms = JAXBHandlerUtil.unMarshal();
+        Node term, name, namespace, def, defstr, dbxref, acc, dbname, synonym, is_a, consider, relationship;
+
+        Node obo = new Node("obo");
+
+        for (Term t : terms) {
+            obo.children.add(term = new Node(t.getId()));
+            term.children.add(name = new Node("name = " + t.getName())); //
+            term.children.add(namespace = new Node("namespace = " + t.getNamespace())); //
+            term.children.add(def = new Node("defs")); //
+            def.children.add(defstr = new Node("defstr = " + t.getDef().getDefstr())); //
+            def.children.add(dbxref = new Node("dbxref")); //
+            if (t.getDef().getDbxrefs() != null) {
+                for (Dbxref dbx_ref : t.getDef().getDbxrefs()) { //
+                    dbxref.children.add(acc = new Node("acc = " + dbx_ref.getAcc())); //
+                    dbxref.children.add(dbname = new Node("dbname = " + dbx_ref.getDbname())); //
+                }
+            }
+
+            term.children.add(is_a = new Node("is_a"));
+            if (t.getIs_a() != null) {
+                for (String isa : t.getIs_a()) {
+                    is_a.children.add(new Node(isa));
+                }
+            }
+
+            term.children.add((synonym = new Node("synonyms")));
+
+            if (t.getSynonym() != null) {
+                for (Synonym s : t.getSynonym()) {
+                    synonym.children.add(new Node("synonym_text = " + s.getSynonym_text()));
+                    synonym.children.add(new Node(s.getSynonym_text()));
+                    if (s.getDbxref() != null) {
+                        dbxref.children.add(new Node("acc = " + s.getDbxref().getAcc())); //
+                        dbxref.children.add(new Node("dbname = " + s.getDbxref().getDbname())); //
+                    }
+                }
+            }
+
+            term.children.add(relationship = new Node("relationship"));
+            if (t.getRelationship() != null) {
+                for (Relationship r : t.getRelationship()) {
+                    relationship.children.add(new Node("type = " + r.getType()));
+                    relationship.children.add(new Node("to = " + r.getTo()));
+                }
+            }
 
 
+            term.children.add(new Node("comment = " + t.getComment()));
+            term.children.add(new Node("is_obsolete = " + t.getIs_obsolete()));
 
+            term.children.add(consider = new Node("consider"));
+            if (t.getConsider() != null) {
+                for (String cns : t.getConsider()) {
+                    consider.children.add(new Node("consider = " + cns));
+                }
+            }
 
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return obo;
+    }
 
 
     /**
