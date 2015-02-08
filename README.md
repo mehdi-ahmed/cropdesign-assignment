@@ -9,9 +9,9 @@ Write a java program with  user-friendly graphical interface that:
  - step 3: When a certain term which has reference to an other term (<is_a> tag) and you click on this reference term tag, put the focus in the tree on the node of that other term.
 
 
-Prerequisites : 
--Maven 3.
-- JDK 6 or greater.
+Prerequisites: 
+	-Maven 3.
+	-JDK 6 or greater.
 
 
 How To run the cropdesign-assignment Tool : 
