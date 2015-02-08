@@ -30,7 +30,8 @@ I - For Windows users:
 https://github.com/mehdi-ahmed/cropdesign-assignment
 
      3.1 -Click on the Download Zip, on the right of the screen.
-     3.2 -Unzip Folder and go to root folder. You will find sources files and bat file. Click on startswing.bat
+     3.2 -Unzip Folder and go to root folder. You will find sources files and bat file. Click on startswing.bat.
+     This will build the maven project and launch the tool.
   
 II - For Linux/Mac users: 
 
