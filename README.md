@@ -18,24 +18,24 @@ How To run the cropdesign-assignment Tool :
 
 I - For Windows users: 
 
-  1 - Set up Maven 3 environment variable.
-   ==> To set you maven environment variable, please consider reading this : 
-   http://maven.apache.org/download.cgi
+     1 - Set up Maven 3 environment variable.
+      ==> To set you maven environment variable, please consider reading this : 
+     http://maven.apache.org/download.cgi
 
-  2 -  Set up JDK 6 or 7 (Tested on both) environment variable.
-    ==> To set you Java environment variable, please consider reading this : 
-    https://www.java.com/en/download/help/path.xml
+    2 -  Set up JDK 6 or 7 (Tested on both) environment variable.
+        ==> To set you Java environment variable, please consider reading this : 
+        https://www.java.com/en/download/help/path.xml
 
 3  - Go to Gihub: 
 https://github.com/mehdi-ahmed/cropdesign-assignment
 
-  3.1   -Click on the Download Zip, on the right of the screen.
-  3.3   -Unzip Folder and go to root folder. You will find sources files and bat file. Click on startswing.bat
+     3.1 -Click on the Download Zip, on the right of the screen.
+     3.3 -Unzip Folder and go to root folder. You will find sources files and bat file. Click on startswing.bat
   
 II - For Linux/Mac users: 
 
- -Follow Step I.1 and I.2
- -Open a shell terminal and type : 
+    -Follow Step I.1 and I.2
+     -Open a shell terminal and type : 
  mvn clean install -DskipTests exec:java -Dexec.mainClass="com.cropdesign.assignment.ui.GoTermsTree"
   
 
