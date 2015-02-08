@@ -26,16 +26,17 @@ I - For Windows users:
     ==> To set you Java environment variable, please consider reading this : 
     https://www.java.com/en/download/help/path.xml
 
-3  - Go to Gihub : 
+3  - Go to Gihub: 
+
   3.1 https://github.com/mehdi-ahmed/cropdesign-assignment
   3.2 click on the Download Zip, on the right of the screen.
   3.3 Unzip Folder and go to root folder. You will find sources files and bat file. Click on startswing.bat
   
 II - For Linux/Mac users: 
 
-  - Follow Step I.1 and I.2
-  - open a shell terminal and type : 
-     mvn clean install -DskipTests exec:java -Dexec.mainClass="com.cropdesign.assignment.ui.GoTermsTree"
+ -Follow Step I.1 and I.2
+ -Open a shell terminal and type : 
+ mvn clean install -DskipTests exec:java -Dexec.mainClass="com.cropdesign.assignment.ui.GoTermsTree"
   
 
 
