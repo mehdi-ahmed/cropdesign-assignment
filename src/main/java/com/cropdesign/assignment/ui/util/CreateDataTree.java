@@ -54,11 +54,11 @@ public class CreateDataTree {
             if (t.getSynonym() != null) {
                 for (Synonym s : t.getSynonym()) {
                     synonym.children.add(new Node("synonym_text = " + s.getSynonym_text()));
-                    synonym.children.add(new Node(s.getSynonym_text()));
                     if (s.getDbxref() != null) {
-                        dbxref.children.add(new Node("acc = " + s.getDbxref().getAcc())); //
-                        dbxref.children.add(new Node("dbname = " + s.getDbxref().getDbname())); //
-                    }
+                        synonym.children.add(dbxref = new Node("dbxref"));
+                            dbxref.children.add(new Node("acc = " + s.getDbxref().getAcc())); //
+                            dbxref.children.add(new Node("dbname = " + s.getDbxref().getDbname())); //
+                        }
                 }
             }
 

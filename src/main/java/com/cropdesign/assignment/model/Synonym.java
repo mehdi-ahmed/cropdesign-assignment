@@ -1,6 +1,7 @@
 package com.cropdesign.assignment.model;
 
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "term")
@@ -9,6 +10,7 @@ public class Synonym {
     private String synonym_text;
     private Dbxref dbxref;
 
+    @XmlElement(name = "dbxref")
     public Dbxref getDbxref() {
         return dbxref;
     }

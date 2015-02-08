@@ -22,8 +22,8 @@ public class IS_ASelectionListener implements TreeSelectionListener {
     public void valueChanged(TreeSelectionEvent e) {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
         DefaultMutableTreeNode root = null;
-        DefaultMutableTreeNode swap = null;
-        TreePath tp = null;
+        DefaultMutableTreeNode swap;
+        TreePath tp;
         swap = node;
         while (node.getParent() != null) {
             root = (DefaultMutableTreeNode) node.getParent();
