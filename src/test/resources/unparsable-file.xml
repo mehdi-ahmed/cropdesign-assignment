@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<obo>
+    <term>
+        <id>GO:0000001</id>
+        <name>mitochondrion inheritance</name>
+        <namespace>biological_process</namespace>
+        <def>
+            <defstr>The distribution of mitochondria, including the mitochondrial genome, into daughter cells after
+                mitosis or meiosis, mediated by interactions between mitochondria and the cytoskeleton.
+            </defstr>
+            <dbxref>
+                <acc>mcc</acc>
+                <dbname>GOC</dbname>
+            </dbxref>
+            <dbxref>
+                <acc>10873824</acc>
+                <dbname>PMID</dbname>
+            </dbxref>
+            <dbxref>
+                <acc>11389764</acc>
+                <dbname>PMID</dbname>
+            </dbxref>
+        </def>
+        <synonym scope="exact">
+            <synonym_text>mitochondrial inheritance</synonym_text>
+        </synonym>
+        <is_a>GO:0048308</is_a>
+        <is_a>GO:0048311</is_a>
+<!--
+    </term>
+</obo>-->

@@ -7,7 +7,12 @@ import com.cropdesign.assignment.model.Term;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.util.List;
 
 /**
@@ -17,27 +22,62 @@ import java.util.List;
 
 public class JAXBHandlerUtil {
 
-    private final static String XML_FILE_NAME = "go_daily-termdb.obo-xml";
+    public final static String XML_FILE_NAME = "go_daily-termdb.obo-xml";
 
+    /**
+     * the file reader
+     */
+    private static Reader reader;
+    /**
+     * StAX parser reader
+     */
+    private static XMLStreamReader xmlStreamReader;
+    /**
+     * xml unmarshaller with importer context
+     */
+    private static Unmarshaller unmarshaller;
 
-    public static List<Term> unMarshal() throws JAXBException {
-
-        JAXBContext jaxbContext = JAXBContext.newInstance(Obo.class);
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-
-        File xmlFile = readXmlFile(XML_FILE_NAME);
-        Obo obo = (Obo) jaxbUnmarshaller.unmarshal(xmlFile);
-        return obo.getTerms();
-
-    }
-
-    public static File readXmlFile(String fileName) {
-        ClassLoader classLoader = JAXBHandlerUtil.class.getClassLoader();
-        if (classLoader.getResource(fileName) == null) {
-            return null;
+    public static List<Term> getTerms() throws JAXBException {
+        try {
+            Obo obo = (Obo) getUnmarshaller().unmarshal(xmlStreamReader);
+            return obo.getTerms();
+        } catch (final JAXBException e) {
+            throw new RuntimeException("XML input file parsing error: unable to setup parser context.", e);
         }
-        return new File(classLoader.getResource(fileName).getFile());
     }
 
+
+    public static JAXBContext createJAXBContext() throws JAXBException {
+        return JAXBContext.newInstance(Obo.class);
+    }
+
+    public static void createUnMarshaller() throws JAXBException {
+        final JAXBContext jaxbContext = createJAXBContext();
+        unmarshaller = jaxbContext.createUnmarshaller();
+    }
+
+    public static Reader getReader(String filename) throws FileNotFoundException {
+        ClassLoader classLoader = JAXBHandlerUtil.class.getClassLoader();
+        if (classLoader.getResource(filename) != null) {
+            return new FileReader(classLoader.getResource(filename).getFile());
+        }
+        return null;
+    }
+
+
+    public static void createStAXReader(String filename) {
+        try {
+            final XMLInputFactory xmlif = XMLInputFactory.newInstance();
+            xmlif.setProperty(XMLInputFactory.IS_COALESCING, true);
+            reader = getReader(filename);
+            xmlStreamReader = xmlif.createXMLStreamReader(reader);
+        } catch (final Exception e) {
+            throw new IllegalArgumentException("XML input read error: Unable to create reader.", e);
+        }
+    }
+
+    public static Unmarshaller getUnmarshaller() {
+        return unmarshaller;
+    }
 }
 

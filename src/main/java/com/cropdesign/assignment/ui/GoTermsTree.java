@@ -1,9 +1,6 @@
 package com.cropdesign.assignment.ui;
 
-import com.cropdesign.assignment.model.Dbxref;
-import com.cropdesign.assignment.model.Relationship;
-import com.cropdesign.assignment.model.Synonym;
-import com.cropdesign.assignment.model.Term;
+import com.cropdesign.assignment.model.*;
 import com.cropdesign.assignment.ui.test.Node;
 import com.cropdesign.assignment.ui.test.NodeIF;
 import com.cropdesign.assignment.util.JAXBHandlerUtil;
@@ -25,6 +22,7 @@ public class GoTermsTree extends JPanel {
     private JTree tree;
     private URL helpURL;
     private static boolean DEBUG = false;
+    private List<Term> terms;
 
     // Optionally play with line styles. Possible values are
     // "Angled" (the default), "Horizontal", and "None".
@@ -36,6 +34,13 @@ public class GoTermsTree extends JPanel {
 
     public GoTermsTree() throws JAXBException {
         super(new GridLayout(1, 0));
+
+
+        //read ans Parse XML file
+        JAXBHandlerUtil.createUnMarshaller();
+        JAXBHandlerUtil.createStAXReader(JAXBHandlerUtil.XML_FILE_NAME);
+        terms = JAXBHandlerUtil.getTerms();
+
 
         // Create the nodes.
         Node top = createDataTree();
@@ -114,8 +119,8 @@ public class GoTermsTree extends JPanel {
 
 
     Node createDataTree() throws JAXBException {
-        List<Term> terms = JAXBHandlerUtil.unMarshal();
-        Node term, name, namespace, def, defstr, dbxref, acc, dbname, synonym, is_a, consider, relationship;
+
+        Node term, name, namespace, def, defstr, dbxref, acc, dbname, synonym, is_a, consider, relationship, xref_analog;
 
         Node obo = new Node("obo");
 
@@ -130,6 +135,15 @@ public class GoTermsTree extends JPanel {
                 for (Dbxref dbx_ref : t.getDef().getDbxrefs()) { //
                     dbxref.children.add(acc = new Node("acc = " + dbx_ref.getAcc())); //
                     dbxref.children.add(dbname = new Node("dbname = " + dbx_ref.getDbname())); //
+                }
+            }
+
+            term.children.add(xref_analog = new Node("xref_analog"));
+            if (t.getXref_analogs() != null) {
+                for (XrefAnalog x : t.getXref_analogs()) {
+                    xref_analog.children.add(new Node("acc = " + x.getAcc()));
+                    xref_analog.children.add(new Node("dbname = " + x.getDbname()));
+                    xref_analog.children.add(new Node("name = " + x.getName()));
                 }
             }
 
