@@ -1,4 +1,4 @@
-package com.cropdesign.assignment.ui.test;
+package com.cropdesign.assignment.ui;
 
 import java.util.ArrayList;
 

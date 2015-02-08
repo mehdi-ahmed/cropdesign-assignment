@@ -1,13 +1,10 @@
 package com.cropdesign.assignment.ui;
 
 import com.cropdesign.assignment.model.*;
-import com.cropdesign.assignment.ui.test.Node;
-import com.cropdesign.assignment.ui.test.NodeIF;
 import com.cropdesign.assignment.util.JAXBHandlerUtil;
 
 import java.awt.*;
 import java.net.URL;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.*;
@@ -86,7 +83,6 @@ public class GoTermsTree extends JPanel {
 
         });
 
-
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
         if (playWithLineStyle) {
@@ -100,7 +96,6 @@ public class GoTermsTree extends JPanel {
         // Add the scroll panes to a split pane.
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         splitPane.setTopComponent(treeView);
-        //splitPane.setBottomComponent(htmlView);
 
         Dimension minimumSize = new Dimension(600, 600);
         //htmlView.setMinimumSize(minimumSize);
@@ -109,6 +104,7 @@ public class GoTermsTree extends JPanel {
         splitPane.setPreferredSize(new Dimension(600, 600));
 
         // Add the split pane to this panel.
+
         add(splitPane);
     }
 
