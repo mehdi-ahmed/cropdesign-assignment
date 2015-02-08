@@ -35,8 +35,8 @@ https://github.com/mehdi-ahmed/cropdesign-assignment
   
 II - For Linux/Mac users: 
 
- -Follow Step I.1 and I.2
- -Open a shell terminal and type:
+  -Follow Step I.1 and I.2.
+  -Open a shell terminal and type:
 
       mvn clean install -DskipTests exec:java -Dexec.mainClass="com.cropdesign.assignment.ui.GoTermsTree"
 
