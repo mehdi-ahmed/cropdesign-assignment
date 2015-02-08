@@ -77,6 +77,6 @@ public class JAXBHandlerUtilTest {
         assertEquals(term1.getIs_a().get(0), "GO:0034308");
 
         Term term2 = terms.get(1);
-        assertEquals(term2.getIs_a().get(0), "GO:0018130");
+        assertEquals(term2.getIs_a().get(0), "GO:2001316");
     }
 }

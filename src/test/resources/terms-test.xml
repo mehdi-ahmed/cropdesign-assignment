@@ -224,10 +224,11 @@
                 <dbname>GOC</dbname>
             </dbxref>
         </synonym>
-        <is_a>GO:0018130</is_a>
-        <is_a>GO:0034309</is_a>
-        <is_a>GO:0042181</is_a>
-        <is_a>GO:1901362</is_a>
-        <is_a>GO:2001316</is_a>
+        <is_a>GO:2001316</is_a> <!-- exist -->
+        <is_a>XXX</is_a>
+        <is_a>YYY</is_a>
+        <is_a>ZZZ</is_a>
+        <is_a>BLABLA</is_a>
+        <is_a>HURA</is_a>
     </term>
 </obo>
