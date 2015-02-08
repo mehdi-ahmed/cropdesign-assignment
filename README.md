@@ -40,3 +40,12 @@ II - For Linux/Mac users:
       mvn clean install -DskipTests exec:java -Dexec.mainClass="com.cropdesign.assignment.ui.GoTermsTree"
 
 
+Remark:
+
+Certain users might encouter an error while running the tool, related to:
+     Java.Lang.OutOfMemoryError: Java Heap
+ 
+ To fix this, you have to set up the environment variable MAVEN_OPTS, and set the value -Xmx512m
+ 
+ For Linux/Mac users, open a terminal command window and type :
+        export MAVEN_OPTS=-Xmx512m
