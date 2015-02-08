@@ -10,8 +10,8 @@ Write a java program with  user-friendly graphical interface that:
 
 
 Prerequisites: 
--Maven 3.
--JDK 6 or greater.
+  - Maven 3.
+  - JDK 6 or greater.
 
 
 How To run the cropdesign-assignment Tool : 
