@@ -36,10 +36,10 @@ public class JTreeExample3 extends JFrame{
         contentPane.add(jsp,BorderLayout.CENTER);
 
         //this code sets the root to visible and then selects it
-       /* jt.setRootVisible(true);
-        jt.setSelectionPath(new TreePath(rootNode));*/
+        //jt.setRootVisible(true);
+        jt.setSelectionPath(new TreePath(rootNode));
 
-    }
+    }//test 113 car is ref avant 109
 
     public void populateTree(){
         DefaultMutableTreeNode dmtn;
@@ -47,10 +47,7 @@ public class JTreeExample3 extends JFrame{
             dmtn = new DefaultMutableTreeNode("Node " + i);
             for (int j = 1; j < 5; j++){
                 dmtn.add(new DefaultMutableTreeNode("Leaf Node " + i + "." + j));
-                if(i == 5) {
-                    jt.setRootVisible(true);
-                    jt.setSelectionPath(new TreePath(rootNode));
-                }
+
 
 
             }

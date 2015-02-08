@@ -7,12 +7,14 @@ import com.cropdesign.assignment.util.JAXBHandlerUtil;
 
 import java.awt.*;
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import javax.xml.bind.JAXBException;
 
@@ -36,7 +38,7 @@ public class GoTermsTree extends JPanel {
         super(new GridLayout(1, 0));
 
 
-        //read ans Parse XML file
+        //read and Parse XML file, then retrieve list of terms.
         JAXBHandlerUtil.createUnMarshaller();
         JAXBHandlerUtil.createStAXReader(JAXBHandlerUtil.XML_FILE_NAME);
         terms = JAXBHandlerUtil.getTerms();
@@ -49,34 +51,37 @@ public class GoTermsTree extends JPanel {
         //tree = new JTree(top);
         DefaultMutableTreeNode jtTop = createNodes(top);
         final JTree tree = new JTree(jtTop);
+
         tree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
-
-    /* if nothing is selected */
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+                DefaultMutableTreeNode root = null;
+                DefaultMutableTreeNode swap = null;
+                TreePath tp = null;
+                swap = node;
+                while (node.getParent() != null) {
+                    root = (DefaultMutableTreeNode) node.getParent();
+                    node = root;
+                }
+                node = swap;
+                /* if nothing is selected */
                 if (node == null) {
                     return;
                 }
 
-    /* retrieve the node that was selected */
-                Object nodeInfo = node.getUserObject();
-    /* React to the node selection. */
-                final JFrame parent = new JFrame();
-                JButton button = new JButton();
+                DefaultMutableTreeNode directParent = (DefaultMutableTreeNode) node.getParent();
+                if (directParent.toString().equals("is_a")) {
+                    tp = find(root, node.toString());
 
-                button.setText("Click me to show dialog!");
-                parent.add(button);
-                parent.pack();
-                parent.setVisible(true);
-
-                button.addActionListener(new java.awt.event.ActionListener() {
-                    @Override
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        String name = JOptionPane.showInputDialog(parent,
-                                "What is your name?", null);
+                    if (tp == null) {
+                        final JFrame parent = new JFrame();
+                        JOptionPane.showMessageDialog(parent, "IS_A reference not found!");
+                    } else {
+                        tree.setSelectionPath(tp);
+                        tree.scrollPathToVisible(tp);
                     }
-                });
+                }
             }
 
         });
@@ -107,7 +112,21 @@ public class GoTermsTree extends JPanel {
         add(splitPane);
     }
 
-    private void createNodes(DefaultMutableTreeNode top) throws JAXBException {
+
+    private TreePath find(DefaultMutableTreeNode root, String s) {
+        DefaultMutableTreeNode currentNode = root.getNextNode();
+        do {
+            if (currentNode.getLevel() == 1) {
+                if (currentNode.toString().equalsIgnoreCase(s)) {
+                    return new TreePath(currentNode.getPath());
+                }
+            }
+
+            currentNode = currentNode.getNextNode();
+            continue;
+        }
+        while (currentNode != null);
+        return null;
     }
 
 
@@ -187,6 +206,7 @@ public class GoTermsTree extends JPanel {
             }
 
         }
+
 
         return obo;
     }
