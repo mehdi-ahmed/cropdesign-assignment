@@ -27,10 +27,10 @@ I - For Windows users:
     https://www.java.com/en/download/help/path.xml
 
 3  - Go to Gihub: 
+https://github.com/mehdi-ahmed/cropdesign-assignment
 
-  3.1 https://github.com/mehdi-ahmed/cropdesign-assignment
-  3.2 click on the Download Zip, on the right of the screen.
-  3.3 Unzip Folder and go to root folder. You will find sources files and bat file. Click on startswing.bat
+  3.1   -Click on the Download Zip, on the right of the screen.
+  3.3   -Unzip Folder and go to root folder. You will find sources files and bat file. Click on startswing.bat
   
 II - For Linux/Mac users: 
 
