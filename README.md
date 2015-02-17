@@ -50,3 +50,6 @@ Certain users might encouter an error while running the tool, related to:
  
  For Linux/Mac users, open a terminal command window and type :
         export MAVEN_OPTS=-Xmx512m
+
+
+Finally, make sure that there are no blank space in the folder path where you run the bat file.(to be fixed later)
