@@ -53,3 +53,7 @@ Certain users might encouter an error while running the tool, related to:
 
 
         Finally, make sure that there are no blank space in the folder path where you run the bat file.(to be fixed later)
+        Examples : 
+        C:\Users\XX\Downloads\cropdesign-assignment-master>startswing.bat    // ok
+        C:\Users\XX\Downloads\cropdesign-assignment-master (2)>startswing.bat    // not ok
+        
