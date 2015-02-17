@@ -41,7 +41,7 @@ II - For Linux/Mac users:
       mvn clean install -DskipTests exec:java -Dexec.mainClass="com.cropdesign.assignment.ui.GoTermsTree"
 
 
-Remark:
+Remarks:
 
 Certain users might encouter an error while running the tool, related to:
      Java.Lang.OutOfMemoryError: Java Heap
